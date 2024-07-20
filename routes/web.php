@@ -26,5 +26,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 });
 
+// routes/web.php
+use App\Http\Controllers\SettingsController;
+
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index')->middleware('auth');
+Route::patch('/settings', [SettingsController::class, 'update'])->name('settings.update')->middleware('auth');
+Route::delete('/settings', [SettingsController::class, 'destroy'])->name('settings.destroy')->middleware('auth');
 
 require __DIR__.'/auth.php';
