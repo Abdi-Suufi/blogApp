@@ -8,6 +8,7 @@
 
     <div class="row justify-content-center">
         <div class="col-md-8">
+            <!-- Update Settings Form -->
             <form method="POST" action="{{ route('settings.update') }}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
@@ -33,23 +34,59 @@
 
                         <!-- Conditionally Display Delete Button -->
                         @if (!Auth::user()->is_admin)
-                        <form method="POST" action="{{ route('settings.destroy') }}" class="mt-3">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete Account</button>
-                        </form>
+                        <button type="button" class="btn btn-danger mt-3" id="delete-account-button">Delete Account</button>
                         @endif
                     </div>
                 </div>
             </form>
+
+            <!-- Hidden Delete Account Form -->
+            @if (!Auth::user()->is_admin)
+            <form method="POST" action="{{ route('settings.destroy') }}" id="delete-account-form" style="display: none;">
+                @csrf
+                @method('DELETE')
+            </form>
+            @endif
         </div>
     </div>
 </div>
 
 @section('scripts')
 <script>
-    document.getElementById('profile_picture_preview').addEventListener('click', function() {
-        document.getElementById('profile_picture').click();
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Script loaded'); // Debugging statement
+
+        const profilePicturePreview = document.getElementById('profile_picture_preview');
+        const profilePictureInput = document.getElementById('profile_picture');
+        const deleteAccountButton = document.getElementById('delete-account-button');
+        const deleteAccountForm = document.getElementById('delete-account-form');
+
+        // Show file picker when profile picture is clicked
+        profilePicturePreview.addEventListener('click', function() {
+            console.log('Profile picture clicked'); // Debugging statement
+            profilePictureInput.click();
+        });
+
+        // Preview the selected image
+        profilePictureInput.addEventListener('change', function(event) {
+            console.log('Profile picture file selected'); // Debugging statement
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePicturePreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Confirm before deleting account
+        deleteAccountButton.addEventListener('click', function(event) {
+            console.log('Delete button clicked'); // Debugging statement
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                deleteAccountForm.submit();
+            }
+        });
     });
 </script>
 @endsection

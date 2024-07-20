@@ -21,6 +21,7 @@
         <div class="col-md-8 offset-md-2">
             <div class="card m-4">
                 <div class="card-header">
+                    <img src="{{ $post->user->profile_picture ? Storage::url($post->user->profile_picture) : 'https://via.placeholder.com/50' }}" alt="Profile Picture" class="img-thumbnail rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
                     <h2>{{ $post->title }}</h2>
                     <small>by {{ $post->user->name }}</small>
                 </div>

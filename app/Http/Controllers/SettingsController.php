@@ -46,11 +46,7 @@ class SettingsController extends Controller
     {
         $user = Auth::user();
         Auth::logout();
-
         if ($user instanceof \Illuminate\Database\Eloquent\Model) {
-            if ($user->profile_picture) {
-                Storage::delete($user->profile_picture);
-            }
             $user->delete();
         }
 
