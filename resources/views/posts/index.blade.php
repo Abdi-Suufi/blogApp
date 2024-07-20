@@ -2,8 +2,22 @@
 
 @section('content')
 <div class="container">
+    <!-- Flash messages -->
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+
+    <!-- Posts list -->
     <div class="row">
-        @foreach ($posts as $post)
+        @forelse ($posts as $post)
         <div class="col-md-8 offset-md-2">
             <div class="card mt-4">
                 <div class="card-header">
@@ -14,7 +28,7 @@
                     <p>{{ $post->body }}</p>
                 </div>
                 @auth
-                @if(auth()->user()->is_admin)
+                @if(auth()->user()->id === $post->user_id || auth()->user()->is_admin)
                 <div class="card-footer">
                     <form action="{{ route('posts.destroy', $post) }}" method="POST">
                         @csrf
@@ -26,7 +40,13 @@
                 @endauth
             </div>
         </div>
-        @endforeach
+        @empty
+        <div class="col-md-8 offset-md-2">
+            <div class="alert alert-info text-center">
+                Be the first to post something!
+            </div>
+        </div>
+        @endforelse
     </div>
 </div>
 @endsection

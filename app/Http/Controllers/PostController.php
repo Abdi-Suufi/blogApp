@@ -32,9 +32,14 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
-        if (auth()->user()->is_admin) {
-            $post->delete();
+        // Check if the authenticated user is the owner of the post
+        if (auth()->user()->id !== $post->user_id && !auth()->user()->is_admin) {
+            return redirect()->route('posts.index')->with('error', 'Unauthorized action.');
         }
-        return redirect()->route('posts.index');
+
+        $post->delete();
+
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }
+
 }
