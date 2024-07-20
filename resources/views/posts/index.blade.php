@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="background-color: rgba(0, 0, 0, 0.3);">
     <!-- Flash messages -->
     @if (session('success'))
     <div class="alert alert-success">
@@ -19,7 +19,7 @@
     <div class="row">
         @forelse ($posts as $post)
         <div class="col-md-8 offset-md-2">
-            <div class="card mt-4">
+            <div class="card m-4">
                 <div class="card-header">
                     <h2>{{ $post->title }}</h2>
                     <small>by {{ $post->user->name }}</small>
