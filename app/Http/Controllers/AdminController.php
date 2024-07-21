@@ -24,4 +24,10 @@ class AdminController extends Controller
         $posts = $user->posts;
         return view('admin.user-posts', compact('user', 'posts'));
     }
+
+    public function adminPanel()
+    {
+        $users = User::all(); // Adjust this as needed for pagination or other considerations
+        return view('admin.panel', compact('users'));
+    }
 }

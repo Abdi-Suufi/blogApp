@@ -43,4 +43,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/user/{user}/posts', [AdminController::class, 'viewUserPosts'])->name('admin.viewUserPosts');
 });
 
+use App\Http\Controllers\VerificationController;
+
+Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
+Route::post('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+
 require __DIR__.'/auth.php';
