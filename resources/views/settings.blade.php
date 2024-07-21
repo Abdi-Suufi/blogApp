@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container text-white">
     <h1 class="text-center mb-4">Settings</h1>
 
     <div class="row justify-content-center">
