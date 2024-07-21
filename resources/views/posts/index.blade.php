@@ -19,11 +19,13 @@
     <div class="row">
         @forelse ($posts as $post)
         <div class="col-md-8 offset-md-2">
-            <div class="card m-4">
+            <div class="card m-4 bg-dark border-white text-white">
                 <div class="card-header">
                     <h2>{{ $post->title }}</h2>
                     <img src="{{ $post->user->profile_picture ? Storage::url($post->user->profile_picture) : 'https://via.placeholder.com/50' }}" alt="Profile Picture" class="img-thumbnail rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
                     <small>by {{ $post->user->name }}</small>
+                    <br>
+                    <small>{{ $post->created_at->format('F j, Y, g:i a') }}</small>
                 </div>
                 <div class="card-body">
                     <p>{{ $post->body }}</p>

@@ -31,13 +31,11 @@
                         <div class="d-flex justify-content-between">
                             <button type="submit" class="btn btn-primary">Update Settings</button>
 
-                            <!-- Hidden Delete Account Form -->
+                            <!-- Redirect to Delete Account Form -->
                             @if (!Auth::user()->is_admin)
-                            <form action="{{ route('settings.destroy') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete Account</button>
-                            </form>
+                            <a href="{{ route('profile.delete') }}" class="btn btn-danger">
+                                Delete Account
+                            </a>
                             @endif
                         </div>
                     </div>

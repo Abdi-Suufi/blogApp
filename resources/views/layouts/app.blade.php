@@ -18,7 +18,7 @@
 ">
     <nav class="navbar navbar-expand-lg" style="background-color: rgba(0, 0, 0, 0.9);">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('posts.index') }}">Blog App</a>
+            <a class="navbar-brand" href="{{ route('posts.index') }}">Abdi's App</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

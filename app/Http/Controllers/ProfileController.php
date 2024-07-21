@@ -57,4 +57,9 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    public function showDeleteForm()
+    {
+        return view('profile.partials.delete-user-form');
+    }
 }
