@@ -1,5 +1,3 @@
-<!-- resources/views/layouts/app.blade.php -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,8 +9,14 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body style="background-image: url('https://images.unsplash.com/photo-1721400576359-e59aeb6176fa?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<body style="
+    background-image: url('{{ asset('images/scene.jpg') }}');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container">
             <a class="navbar-brand" href="{{ route('posts.index') }}">Blog App</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
