@@ -35,4 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/settings', [SettingsController::class, 'destroy'])->name('settings.destroy');
 });
 
+use App\Http\Controllers\AdminController;
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/panel', [AdminController::class, 'index'])->name('admin.panel');
+    Route::delete('/admin/user/{user}', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+    Route::get('/admin/user/{user}/posts', [AdminController::class, 'viewUserPosts'])->name('admin.viewUserPosts');
+});
+
 require __DIR__.'/auth.php';

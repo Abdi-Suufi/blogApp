@@ -1,3 +1,5 @@
+<!-- resources/views/layouts/app.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,21 +25,19 @@
                         <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
                     @else
+                    @if (Auth::user()->is_admin)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.panel') }}">Admin Panel</a>
+                    </li>
+                    @endif
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('posts.create') }}">Create Post</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a>
-                            <div class="dropdown-divider"></div>
-                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                                @csrf
-                                <button type="submit" class="dropdown-item">Logout</button>
-                            </form>
-                        </div>
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="nav-link btn btn-link">Logout</button>
+                        </form>
                     </li>
                     @endguest
                 </ul>
@@ -48,9 +48,6 @@
     <main class="py-4">
         @yield('content')
     </main>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
