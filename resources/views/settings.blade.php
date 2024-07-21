@@ -1,5 +1,3 @@
-<!-- resources/views/settings.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
@@ -30,23 +28,21 @@
                         </div>
 
                         <!-- Buttons -->
-                        <button type="submit" class="btn btn-primary">Update Settings</button>
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-primary">Update Settings</button>
 
-                        <!-- Conditionally Display Delete Button -->
-                        @if (!Auth::user()->is_admin)
-                        <button type="button" class="btn btn-danger mt-3" id="delete-account-button">Delete Account</button>
-                        @endif
+                            <!-- Hidden Delete Account Form -->
+                            @if (!Auth::user()->is_admin)
+                            <form action="{{ route('settings.destroy') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete Account</button>
+                            </form>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </form>
-
-            <!-- Hidden Delete Account Form -->
-            @if (!Auth::user()->is_admin)
-            <form method="POST" action="{{ route('settings.destroy') }}" id="delete-account-form" style="display: none;">
-                @csrf
-                @method('DELETE')
-            </form>
-            @endif
         </div>
     </div>
 </div>
@@ -58,8 +54,6 @@
 
         const profilePicturePreview = document.getElementById('profile_picture_preview');
         const profilePictureInput = document.getElementById('profile_picture');
-        const deleteAccountButton = document.getElementById('delete-account-button');
-        const deleteAccountForm = document.getElementById('delete-account-form');
 
         // Show file picker when profile picture is clicked
         profilePicturePreview.addEventListener('click', function() {
@@ -77,14 +71,6 @@
                     profilePicturePreview.src = e.target.result;
                 };
                 reader.readAsDataURL(file);
-            }
-        });
-
-        // Confirm before deleting account
-        deleteAccountButton.addEventListener('click', function(event) {
-            console.log('Delete button clicked'); // Debugging statement
-            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
-                deleteAccountForm.submit();
             }
         });
     });

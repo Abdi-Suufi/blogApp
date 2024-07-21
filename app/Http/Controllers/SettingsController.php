@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -23,7 +21,7 @@ class SettingsController extends Controller
         ]);
 
         $user = Auth::user();
-        if ($user instanceof \Illuminate\Database\Eloquent\Model) {
+        if ($user) {
             $user->name = $request->name;
 
             if ($request->hasFile('profile_picture')) {
@@ -44,12 +42,14 @@ class SettingsController extends Controller
 
     public function destroy(Request $request)
     {
-        $user = Auth::user();
-        Auth::logout();
-        if ($user instanceof \Illuminate\Database\Eloquent\Model) {
-            $user->delete();
+        $user = Auth::user(); // Get the currently authenticated user
+
+        if ($user) {
+            $user->delete(); // Delete the user
+            Auth::logout(); // Log the user out
+            return redirect()->route('posts.index')->with('status', 'Account deleted successfully.');
         }
 
-        return redirect('/')->with('success', 'Your account has been deleted.');
+        return redirect()->back()->withErrors(['error' => 'Unable to delete account.']);
     }
 }
