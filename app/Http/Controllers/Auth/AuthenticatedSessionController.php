@@ -31,6 +31,16 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended('/');
     }
 
+    protected function authenticated(Request $request, $user)
+    {
+        if (!$user->hasVerifiedEmail()) {
+            Auth::logout();
+            return redirect()->route('verification.notice');
+        }
+
+        return redirect('auth/verify-email');
+    }
+
     /**
      * Destroy an authenticated session.
      */
