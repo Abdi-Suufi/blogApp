@@ -45,7 +45,7 @@
                             <button type="submit" class="btn btn-primary btn-sm">Like</button>
                             @endif
                         </form>
-                        <span>{{ $post->likes->count() }} likes</span>
+                        <span> Likes: {{ $post->likes->count() }}</span>
                     </div>
                     @auth
                     @if(auth()->user()->id === $post->user_id || auth()->user()->is_admin)
