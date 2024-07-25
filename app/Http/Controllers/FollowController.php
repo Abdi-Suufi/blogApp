@@ -26,3 +26,9 @@ class FollowController extends Controller
      * @param User $user
      * @return \Illuminate\Http\RedirectResponse
      */
+    public function unfollow(User $user)
+    {
+        Auth::user()->unfollow($user);
+        return redirect()->back()->with('success', 'You have unfollowed ' . $user->name);
+    }
+}
