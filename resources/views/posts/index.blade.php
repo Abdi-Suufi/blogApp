@@ -22,8 +22,11 @@
             <div class="card m-4 bg-dark border-white text-white">
                 <div class="card-header">
                     <h2>{{ $post->title }}</h2>
-                    <img src="{{ $post->user->profile_picture ? Storage::url($post->user->profile_picture) : 'https://via.placeholder.com/50' }}" alt="Profile Picture" class="img-thumbnail rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
-                    <small>by {{ $post->user->name }}</small>
+                    <!-- User profile picture and name linking to their profile page -->
+                    <a href="{{ route('users.profile', $post->user->id) }}">
+                        <img src="{{ $post->user->profile_picture ? Storage::url($post->user->profile_picture) : 'https://via.placeholder.com/50' }}" alt="Profile Picture" class="img-thumbnail rounded-circle" style="width: 50px; height: 50px; object-fit: cover;">
+                        <small>by {{ $post->user->name }}</small>
+                    </a>
                     <br>
                     <small>{{ $post->created_at->format('F j, Y, g:i a') }}</small>
                 </div>
@@ -32,6 +35,7 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between align-items-center">
                     <div>
+                        <!-- Like/Unlike functionality -->
                         <form action="{{ $post->isLiked() ? route('posts.unlike', $post) : route('posts.like', $post) }}" method="POST" style="display: inline;">
                             @csrf
                             @if ($post->isLiked())
@@ -58,8 +62,11 @@
                     @forelse ($post->comments as $comment)
                     <div class="comment mb-3">
                         <div class="d-flex align-items-center">
-                            <img src="{{ $comment->user->profile_picture ? Storage::url($comment->user->profile_picture) : 'https://via.placeholder.com/30' }}" alt="Profile Picture" class="img-thumbnail rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
-                            <strong>{{ $comment->user->name }}</strong>
+                            <!-- Commenter profile picture and name linking to their profile page -->
+                            <a href="{{ route('users.profile', $comment->user->id) }}">
+                                <img src="{{ $comment->user->profile_picture ? Storage::url($comment->user->profile_picture) : 'https://via.placeholder.com/30' }}" alt="Profile Picture" class="img-thumbnail rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                                <strong>{{ $comment->user->name }}</strong>
+                            </a>
                             <span class="ms-2 text-muted">{{ $comment->created_at->format('F j, Y, g:i a') }}</span>
                         </div>
                         <p class="mt-2">{{ $comment->body }}</p>

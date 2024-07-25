@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+namespace App\Models;
+
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -64,5 +66,59 @@ class User extends Authenticatable implements MustVerifyEmail
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    /**
+     * Define the relationship for followers.
+     */
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
+    }
+
+    /**
+     * Define the relationship for following.
+     */
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
+    }
+
+    /**
+     * Follow a user.
+     *
+     * @param User $user
+     * @return void
+     */
+    public function follow(User $user)
+    {
+        $this->following()->attach($user->id);
+    }
+
+    /**
+     * Unfollow a user.
+     *
+     * @param User $user
+     * @return void
+     */
+    public function unfollow(User $user)
+    {
+        $this->following()->detach($user->id);
+    }
+
+    /**
+     * Check if the user is following another user.
+     *
+     * @param User $user
+     * @return bool
+     */
+    public function isFollowing(User $user)
+    {
+        return $this->following()->where('followed_id', $user->id)->exists();
+    }
+
+    public function followersCount()
+    {
+        return $this->followers()->count();
     }
 }
