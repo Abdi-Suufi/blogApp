@@ -19,12 +19,14 @@ class SettingsController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'bio' => 'nullable|string|max:500', // Validate the bio field
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $user = Auth::user();
         if ($user instanceof \Illuminate\Database\Eloquent\Model) {
             $user->name = $request->name;
+            $user->bio = $request->bio; // Update bio
 
             if ($request->hasFile('profile_picture')) {
                 // Delete the old profile picture if it exists
@@ -41,6 +43,7 @@ class SettingsController extends Controller
 
         return redirect()->route('settings.index')->with('success', 'Settings updated successfully.');
     }
+
 
     public function destroy(Request $request)
     {

@@ -20,11 +20,15 @@
                         <input type="file" id="profile_picture" name="profile_picture" style="display: none;">
                     </div>
 
-                    <!-- Name Field -->
+                    <!-- Name and Bio Fields -->
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" value="{{ old('name', Auth::user()->name) }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bio">Bio</label>
+                            <textarea class="form-control" id="bio" name="bio" rows="3" required>{{ old('bio', Auth::user()->bio) }}</textarea>
                         </div>
 
                         <!-- Buttons -->
