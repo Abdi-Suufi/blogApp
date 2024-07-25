@@ -53,6 +53,32 @@
                     @endif
                     @endauth
                 </div>
+                <!-- Comments Section -->
+                <div class="card-body">
+                    @forelse ($post->comments as $comment)
+                    <div class="comment mb-3">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ $comment->user->profile_picture ? Storage::url($comment->user->profile_picture) : 'https://via.placeholder.com/30' }}" alt="Profile Picture" class="img-thumbnail rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
+                            <strong>{{ $comment->user->name }}</strong>
+                            <span class="ms-2 text-muted">{{ $comment->created_at->format('F j, Y, g:i a') }}</span>
+                        </div>
+                        <p class="mt-2">{{ $comment->body }}</p>
+                    </div>
+                    @empty
+                    <p>No comments yet.</p>
+                    @endforelse
+                </div>
+                @auth
+                <div class="card-footer">
+                    <form action="{{ route('comments.store', $post) }}" method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <textarea name="body" rows="2" class="form-control" placeholder="Add a comment..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Comment</button>
+                    </form>
+                </div>
+                @endauth
             </div>
         </div>
         @empty

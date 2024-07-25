@@ -7,6 +7,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VerificationController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CommentController;
 
 // Welcome page route
 Route::get('/', function () {
@@ -53,10 +54,10 @@ Route::get('/email/verify', [VerificationController::class, 'show'])->name('veri
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
 
-
-// routes/web.php
+// Like and comment routes
 Route::post('/posts/{post}/like', [LikeController::class, 'store'])->name('posts.like');
 Route::delete('/posts/{post}/like', [LikeController::class, 'destroy'])->name('posts.unlike');
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 // Include the auth routes
 require __DIR__ . '/auth.php';
