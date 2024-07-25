@@ -4,7 +4,7 @@
 <div class="container">
     <h1 class="text-center mb-4">Admin Panel</h1>
 
-    <table class="table table-bordered table-striped table-light">
+    <table class="table table-bordered table-striped table-dark">
         <thead>
             <tr>
                 <th>Profile Picture</th>

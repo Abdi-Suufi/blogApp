@@ -7,7 +7,7 @@
     @if($posts->isEmpty())
     <p class="text-center">This user has no posts.</p>
     @else
-    <table class="table table-bordered table-striped table-light">
+    <table class="table table-bordered table-striped table-dark">
         <thead>
             <tr>
                 <th>Title</th>

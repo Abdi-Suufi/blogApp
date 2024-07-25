@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
+
 @section('content')
-<div class="container text-white">
+<div class="container text-white" style="background-color: rgba(111, 2, 4, 0.8);">
     <h1 class="text-center mb-4">{{ $user->name }}'s Profile</h1>
 
     <div class="row justify-content-center">

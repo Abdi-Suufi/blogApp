@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container" style="background-color: rgba(0, 0, 0, 0.3);">
+<div class="container" style="background-color: rgba(111, 2, 4, 0.8);">
     <!-- Flash messages -->
     @if (session('success'))
     <div class="alert alert-success m-1">
@@ -19,7 +19,7 @@
     <div class="row">
         @forelse ($posts as $post)
         <div class="col-md-8 offset-md-2">
-            <div class="card m-4 bg-dark border-white text-white">
+            <div class="card m-4 bg-danger text-white" style="border: 2px solid black;">
                 <div class="card-header">
                     <h2>{{ $post->title }}</h2>
                     <!-- User profile picture and name linking to their profile page -->
@@ -40,7 +40,7 @@
                             @csrf
                             @if ($post->isLiked())
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Unlike</button>
+                            <button type="submit" class="btn btn-warning btn-sm">Unlike</button>
                             @else
                             <button type="submit" class="btn btn-primary btn-sm">Like</button>
                             @endif
@@ -52,7 +52,7 @@
                     <form action="{{ route('posts.destroy', $post) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete post</button>
+                        <button type="submit" class="btn btn-warning btn-sm">Delete post</button>
                     </form>
                     @endif
                     @endauth
@@ -67,7 +67,8 @@
                                 <img src="{{ $comment->user->profile_picture ? Storage::url($comment->user->profile_picture) : 'https://via.placeholder.com/30' }}" alt="Profile Picture" class="img-thumbnail rounded-circle me-2" style="width: 30px; height: 30px; object-fit: cover;">
                                 <strong>{{ $comment->user->name }}</strong>
                             </a>
-                            <span class="ms-2 text-muted">{{ $comment->created_at->format('F j, Y, g:i a') }}</span>
+                            &nbsp;&nbsp;
+                            <span class="ms-2 text-light">{{ $comment->created_at->format('F j, Y, g:i a') }}</span>
                         </div>
                         <p class="mt-2">{{ $comment->body }}</p>
                     </div>
@@ -82,7 +83,7 @@
                         <div class="form-group">
                             <textarea name="body" rows="2" class="form-control" placeholder="Add a comment..." required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary mt-2">Comment</button>
+                        <button type="submit" class="btn btn-primary mt-2">Commit</button>
                     </form>
                 </div>
                 @endauth

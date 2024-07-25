@@ -10,13 +10,13 @@
 </head>
 
 <body style="
-    background-image: url('{{ asset('images/grey.jpg') }}');
+    background-image: url('{{ asset('images/red.jpg') }}');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 ">
-    <nav class="navbar navbar-expand-lg" style="background-color: rgba(0, 0, 0, 0.9);">
+    <nav class="navbar navbar-expand-lg" style="background-color: rgba(213, 51, 67, 0.8);">
         <div class="container">
             <a class="navbar-brand" href="{{ route('posts.index') }}">Abdi's App</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
