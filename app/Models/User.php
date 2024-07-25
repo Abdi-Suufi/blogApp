@@ -59,4 +59,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->last_active_at && $this->last_active_at->diffInMinutes(now()) < 5;
     }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }

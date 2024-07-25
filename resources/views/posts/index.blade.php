@@ -30,17 +30,29 @@
                 <div class="card-body">
                     <p>{{ $post->body }}</p>
                 </div>
-                @auth
-                @if(auth()->user()->id === $post->user_id || auth()->user()->is_admin)
-                <div class="card-footer">
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div>
+                        <form action="{{ $post->isLiked() ? route('posts.unlike', $post) : route('posts.like', $post) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @if ($post->isLiked())
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm">Unlike</button>
+                            @else
+                            <button type="submit" class="btn btn-primary btn-sm">Like</button>
+                            @endif
+                        </form>
+                        <span>{{ $post->likes->count() }} likes</span>
+                    </div>
+                    @auth
+                    @if(auth()->user()->id === $post->user_id || auth()->user()->is_admin)
                     <form action="{{ route('posts.destroy', $post) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
+                    @endif
+                    @endauth
                 </div>
-                @endif
-                @endauth
             </div>
         </div>
         @empty

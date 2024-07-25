@@ -6,6 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VerificationController;
+use App\Http\Controllers\LikeController;
 
 // Welcome page route
 Route::get('/', function () {
@@ -51,6 +52,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::get('/email/verify', [VerificationController::class, 'show'])->name('verification.notice');
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 Route::post('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
+
+
+// routes/web.php
+Route::post('/posts/{post}/like', [LikeController::class, 'store'])->name('posts.like');
+Route::delete('/posts/{post}/like', [LikeController::class, 'destroy'])->name('posts.unlike');
 
 // Include the auth routes
 require __DIR__ . '/auth.php';
