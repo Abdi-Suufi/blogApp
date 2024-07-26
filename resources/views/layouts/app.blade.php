@@ -7,21 +7,6 @@
     <title>Blog App</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .navbar-brand img {
-            height: 40px;
-            width: auto;
-        }
-
-        nav {
-            border-bottom: 1px solid black;
-        }
-
-        body {
-            padding-top: 70px;
-            /* Height of the navbar */
-        }
-    </style>
 </head>
 
 <body style="
@@ -63,7 +48,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a>
-                            <div class="dropdown-divider"></div>
+                            
                             <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                 @csrf
                                 <button type="submit" class="dropdown-item">Logout</button>
