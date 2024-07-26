@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Blog App - Posts</title>
 @section('content')
 <div class="container" style="background-color: rgba(111, 2, 4, 0.8);">
     <!-- Flash messages -->

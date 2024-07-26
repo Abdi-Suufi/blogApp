@@ -1,10 +1,10 @@
 @extends('layouts.app')
-
+<title>Blog App - Create Post</title>
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
+            <div class="card bg-danger text-white" style="border: 2px solid black;">
                 <div class="card-header">Create Post</div>
                 <div class="card-body">
                     <form action="{{ route('posts.store') }}" method="POST">

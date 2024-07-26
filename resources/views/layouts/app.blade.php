@@ -7,6 +7,21 @@
     <title>Blog App</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .navbar-brand img {
+            height: 40px;
+            width: auto;
+        }
+
+        nav {
+            border-bottom: 1px solid black;
+        }
+
+        body {
+            padding-top: 70px;
+            /* Height of the navbar */
+        }
+    </style>
 </head>
 
 <body style="
@@ -16,9 +31,11 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
 ">
-    <nav class="navbar navbar-expand-lg" style="background-color: rgba(213, 51, 67, 0.8);">
+    <nav class="navbar navbar-expand-lg fixed-top" style="background-color: rgba(213, 51, 67, 0.8);">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('posts.index') }}">Abdi's App</a>
+            <a class="navbar-brand" href="{{ route('posts.index') }}">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

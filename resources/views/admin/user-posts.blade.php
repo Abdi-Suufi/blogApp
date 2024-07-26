@@ -7,7 +7,7 @@
     @if($posts->isEmpty())
     <p class="text-center">This user has no posts.</p>
     @else
-    <table class="table table-bordered table-striped table-dark">
+    <table class="table table-bordered table-striped bg-danger text-white">
         <thead>
             <tr>
                 <th>Title</th>
@@ -24,7 +24,7 @@
                     <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this post?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete Post</button>
+                        <button type="submit" class="btn btn-warning btn-sm">Delete Post</button>
                     </form>
                 </td>
             </tr>

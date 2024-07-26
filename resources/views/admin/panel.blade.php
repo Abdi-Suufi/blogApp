@@ -2,9 +2,16 @@
 
 @section('content')
 <div class="container">
-    <h1 class="text-center mb-4">Admin Panel</h1>
+    <h1 class="text-center mb-4 text-white">Admin Panel</h1>
 
-    <table class="table table-bordered table-striped table-dark">
+    <style>
+        .table-bordered td,
+        .table-bordered th {
+            border-color: black !important; /* Override the default border color from bootstrap css*/
+        }
+    </style>
+    
+    <table class="table table-bordered table-striped bg-danger text-white">
         <thead>
             <tr>
                 <th>Profile Picture</th>
@@ -26,7 +33,7 @@
                     <form action="{{ route('admin.deleteUser', $user->id) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to delete this user?');">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete User</button>
+                        <button type="submit" class="btn btn-warning btn-sm">Delete User</button>
                     </form>
                 </td>
             </tr>

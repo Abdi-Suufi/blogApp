@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Blog App - Settings</title>
 @section('content')
 <div class="container text-white">
     <h1 class="text-center mb-4">Settings</h1>

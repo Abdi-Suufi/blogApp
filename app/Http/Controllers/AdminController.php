@@ -27,7 +27,7 @@ class AdminController extends Controller
 
     public function adminPanel()
     {
-        $users = User::all(); // Adjust this as needed for pagination or other considerations
+        $users = User::where('is_admin', 0)->get();
         return view('admin.panel', compact('users'));
     }
 }
