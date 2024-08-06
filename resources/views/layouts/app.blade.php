@@ -7,6 +7,7 @@
     <title>Blog App</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
 </head>
 
 <body style="
@@ -48,7 +49,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('settings.index') }}">Settings</a>
-                            
+
                             <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                 @csrf
                                 <button type="submit" class="dropdown-item">Logout</button>
